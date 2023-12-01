@@ -9,12 +9,12 @@ const app = express();
 app.use(express.json());
 
 app.post("/", (req, res) => {
-  res.send({ Message: "API is working" });
+  res.send({ Message: "WELCOME" });
 });
 
 app.use("/user", UserRoute);
 
-app.listen(8080, async () => {
+app.listen(PORT, async () => {
   try {
     await connection;
     console.log("Database is connected");

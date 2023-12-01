@@ -2,6 +2,7 @@ const express = require("express");
 const { UserModel } = require("../models/UserModel");
 const bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
+require("dotenv").config();
 const UserRoute = express.Router();
 
 UserRoute.post("/signup", async (req, res) => {
@@ -35,7 +36,7 @@ UserRoute.post("/login", async (req, res) => {
     if (user) {
       bcrypt.compare(password, user.password, function (err, result) {
         if (result) {
-          var token = jwt.sign({ userId: user._id }, "secret");
+          var token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY);
           res.json({ message: "Login sucessfully", token: token });
         } else {
           res.status(404).json({ message: "Error while verify Hash Password" });
