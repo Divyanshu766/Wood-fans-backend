@@ -2,7 +2,7 @@ const express = require("express");
 const { connection } = require("./config/db");
 require("dotenv").config();
 const { UserRoute } = require("./routes/UserRoute");
-
+const { ProductRoute } = require("./routes/ProductRoute");
 const PORT = process.env.PORT || 8080;
 
 const app = express();
@@ -13,7 +13,7 @@ app.post("/", (req, res) => {
 });
 
 app.use("/user", UserRoute);
-
+app.use("/product", ProductRoute);
 app.listen(PORT, async () => {
   try {
     await connection;
