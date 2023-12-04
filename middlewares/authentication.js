@@ -1,5 +1,5 @@
 const express = require("express");
-const jwt = rewuire("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
 const Authentication = (req, res, next) => {
@@ -12,7 +12,7 @@ const Authentication = (req, res, next) => {
     if (err) {
       return req.json({ message: "Please Login First" });
     } else {
-      req.userId = decoded.userId;
+      req.userID = decoded.userId;
       next();
     }
   });
