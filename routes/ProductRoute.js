@@ -24,7 +24,6 @@ ProductRoute.get("/", async (req, res) => {
     }
 
     const data = await ProductModel.find(query, null, options);
-    console.log(data);
     res.send(data);
   } catch (error) {
     console.log(error);

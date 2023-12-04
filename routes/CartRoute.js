@@ -11,7 +11,7 @@ CartRoute.get("/", Authentication, async (req, res) => {
 
 CartRoute.post("/create", Authentication, async (req, res) => {
   try {
-    const { image, price, title, type, url1, url2, url3, useremail } = req.body;
+    const { image, price, title, type, url1, url2, url3 } = req.body;
 
     const userID = req.userID;
     const user = await UserModel.findOne({ _id: userID });
@@ -28,6 +28,21 @@ CartRoute.post("/create", Authentication, async (req, res) => {
       useremail: userEmail,
     });
     res.send("Data is created successfully");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+CartRoute.delete("/delete/:ID", Authentication, async (req, res) => {
+  try {
+    const tweetId = req.params.ID;
+
+    const userID = req.userID;
+    const user = await UserModel.findOne({ _id: userID });
+    const userEmail = user?.email;
+
+    await CartModel.findOneAndDelete({ _id: tweetId, useremail: userEmail });
+    res.send("Deleted successfully");
   } catch (error) {
     console.log(error);
   }
